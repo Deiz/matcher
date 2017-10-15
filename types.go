@@ -3,6 +3,7 @@ package matcher
 import (
 	"errors"
 	"reflect"
+	"time"
 )
 
 type Comparator interface {
@@ -18,6 +19,7 @@ func RegisterDefaults() {
 	Register(reflect.ValueOf("foo").Type(), &StringComparator{})
 	Register(reflect.ValueOf(3.14159).Type(), &FloatComparator{})
 	Register(reflect.ValueOf(1).Type(), &IntComparator{})
+	Register(reflect.ValueOf(time.Now()).Type(), &TimeComparator{})
 }
 
 func Compare(comparator Comparator, operator string, lh, rh interface{}) (bool, error) {

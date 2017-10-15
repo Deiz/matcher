@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"testing"
+	"time"
 
 	. "github.com/smartystreets/goconvey/convey"
 )
@@ -108,9 +109,10 @@ func TestMatching(t *testing.T) {
 
 func TestTypeMatching(t *testing.T) {
 	type Person struct {
-		Name   string  `matcher:"name"`
-		Age    int     `matcher:"age"`
-		Height float64 `matcher:"height"`
+		Name     string    `matcher:"name"`
+		Age      int       `matcher:"age"`
+		Height   float64   `matcher:"height"`
+		Birthday time.Time `matcher:"birthday"`
 	}
 
 	type TypeWrapper struct {
@@ -120,10 +122,13 @@ func TestTypeMatching(t *testing.T) {
 		Data  map[string]interface{}
 	}
 
+	baseTime, _ := time.Parse(time.RFC3339, "2000-01-01T00:00:00Z")
+
 	p := Person{
-		Name:   "foo",
-		Age:    1,
-		Height: 1.5,
+		Name:     "foo",
+		Age:      1,
+		Height:   1.5,
+		Birthday: baseTime,
 	}
 
 	operators := []string{"gt", "lt", "eq", "ne"}
@@ -160,6 +165,17 @@ func TestTypeMatching(t *testing.T) {
 				"lt": 2.0,
 				"eq": 1.5,
 				"ne": 3.0,
+			},
+		},
+		{
+			Name:  "time",
+			Field: "birthday",
+			Base:  baseTime,
+			Data: map[string]interface{}{
+				"gt": baseTime.Add(time.Duration(-1) * time.Second),
+				"lt": baseTime.Add(time.Duration(1) * time.Second),
+				"eq": baseTime,
+				"ne": baseTime.Add(time.Duration(1) * time.Hour),
 			},
 		},
 	}
