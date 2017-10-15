@@ -16,6 +16,7 @@ type Comparator interface {
 
 func RegisterDefaults() {
 	Register(reflect.ValueOf("foo").Type(), &StringComparator{})
+	Register(reflect.ValueOf(3.14159).Type(), &FloatComparator{})
 	Register(reflect.ValueOf(1).Type(), &IntComparator{})
 }
 

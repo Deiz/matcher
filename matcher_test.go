@@ -108,31 +108,31 @@ func TestMatching(t *testing.T) {
 
 func TestTypeMatching(t *testing.T) {
 	type Person struct {
-		Name string `matcher:"name"`
-		Age  int    `matcher:"age"`
+		Name   string  `matcher:"name"`
+		Age    int     `matcher:"age"`
+		Height float64 `matcher:"height"`
 	}
 
 	type TypeWrapper struct {
-		Name        string
-		Field       string
-		StructField string
-		Base        interface{}
-		Data        map[string]interface{}
+		Name  string
+		Field string
+		Base  interface{}
+		Data  map[string]interface{}
 	}
 
 	p := Person{
-		Name: "foo",
-		Age:  1,
+		Name:   "foo",
+		Age:    1,
+		Height: 1.5,
 	}
 
 	operators := []string{"gt", "lt", "eq", "ne"}
 
 	types := []*TypeWrapper{
 		{
-			Name:        "string",
-			Field:       "name",
-			StructField: "Name",
-			Base:        "foo",
+			Name:  "string",
+			Field: "name",
+			Base:  "foo",
 			Data: map[string]interface{}{
 				"gt": "e",
 				"lt": "g",
@@ -141,15 +141,25 @@ func TestTypeMatching(t *testing.T) {
 			},
 		},
 		{
-			Name:        "int",
-			Field:       "age",
-			StructField: "Age",
-			Base:        1,
+			Name:  "int",
+			Field: "age",
+			Base:  1,
 			Data: map[string]interface{}{
 				"gt": 0,
 				"lt": 2,
 				"eq": 1,
 				"ne": 3,
+			},
+		},
+		{
+			Name:  "float",
+			Field: "height",
+			Base:  1.5,
+			Data: map[string]interface{}{
+				"gt": 1.0,
+				"lt": 2.0,
+				"eq": 1.5,
+				"ne": 3.0,
 			},
 		},
 	}
