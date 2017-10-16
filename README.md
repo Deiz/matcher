@@ -47,3 +47,25 @@ p := Person{
 // true, nil
 matched, err := matcher.Matches(p, clauses)
 ```
+
+## Registering custom types
+
+Custom types must satisfy the `Comparator` interface:
+```go
+type Comparator interface {
+	GreaterThan(interface{}, interface{}) bool
+	LessThan(interface{}, interface{}) bool
+	EqualTo(interface{}, interface{}) bool
+	NotEqualTo(interface{}, interface{}) bool
+
+	Valid(interface{}) error
+}
+```
+
+A concrete example of this is [cmp_string.go](cmp_string.go)
+
+Once a comparator wrapper has been implemented for a given type, it needs to be associated with the original type via the registry, e.g.:
+```go
+// Pass a reflect.Type corresponding to string, plus your comparator interface implementation.
+matcher.Register(reflect.ValueOf("foo").Type(), &StringComparator{})
+```
