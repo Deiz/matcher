@@ -1,0 +1,33 @@
+hash: 8536a11858eb9702d03d7818f84b801fd6d1c1dcfb477e015b0fd225cdd787d7
+updated: 2017-10-15T12:13:37.359596919-04:00
+imports: []
+testImports:
+- name: github.com/davecgh/go-spew
+  version: 6d212800a42e8ab5c146b8ace3490ee17e5225f9
+  subpackages:
+  - spew
+- name: github.com/gopherjs/gopherjs
+  version: 415225646bb92c4449bb484646f2c95a98402f6f
+  subpackages:
+  - js
+- name: github.com/jtolds/gls
+  version: 77f18212c9c7edc9bd6a33d383a7b545ce62f064
+- name: github.com/pmezard/go-difflib
+  version: d8ed2627bdf02c080bf22230dbb337003b7aba2d
+  subpackages:
+  - difflib
+- name: github.com/smartystreets/assertions
+  version: 0b37b35ec7434b77e77a4bb29b79677cced992ea
+  subpackages:
+  - internal/go-render/render
+  - internal/oglematchers
+- name: github.com/smartystreets/goconvey
+  version: e5b2b7c9111590d019a696c7800593f666e1a7f4
+  subpackages:
+  - convey
+  - convey/gotest
+  - convey/reporting
+- name: github.com/stretchr/testify
+  version: 69483b4bd14f5845b5a1e55bca19e954e827f1d0
+  subpackages:
+  - assert
