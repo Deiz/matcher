@@ -183,8 +183,8 @@ func TestTypeMatching(t *testing.T) {
 	Convey("Given a struct", t, func() {
 		for _, typeTest := range types {
 			for _, op := range operators {
-				msg := fmt.Sprintf("When comparing %ss with the %s method, %v and %v match",
-					typeTest.Name, op, typeTest.Base, typeTest.Data[op])
+				msg := fmt.Sprintf("When compared, %s %v is %s %v",
+					typeTest.Name, typeTest.Base, op, typeTest.Data[op])
 				Convey(msg, func() {
 					clauses := []*Clause{&Clause{Field: typeTest.Field, Operator: op, Value: typeTest.Data[op]}}
 					matched, err := Matches(p, clauses)
